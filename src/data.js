@@ -108,7 +108,7 @@ export const portfolioData = {
   },
 
   ai: {
-    model: "Qwen/Qwen2.5-7B-Instruct",
+    model: "Qwen3 30B-A3B",
     eyebrow: "ASK ME ANYTHING · 与我对话",
     title: "问我任何事。",
     description:
