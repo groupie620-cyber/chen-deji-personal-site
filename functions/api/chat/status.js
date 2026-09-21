@@ -6,7 +6,7 @@ export async function onRequestGet({ env }) {
       enabled: Boolean(env.AI),
       mode: env.AI ? "model" : "unavailable",
       provider: env.AI ? "Cloudflare Workers AI" : "服务未配置",
-      model: env.AI ? "Llama 3.1 8B" : "",
+      model: env.AI ? "Qwen3 30B-A3B" : "",
       knowledgeDocuments: knowledgeCount,
     },
     { headers: { "Cache-Control": "no-store" } },
