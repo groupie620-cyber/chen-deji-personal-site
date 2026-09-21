@@ -19,7 +19,7 @@ export async function onRequestPost({ request, env }) {
   if (guarded) return Response.json({ reply: guarded, mode: "guarded" });
 
   try {
-    const result = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+    const result = await env.AI.run("@cf/qwen/qwen3-30b-a3b-fp8", {
       messages: [{ role: "system", content: buildPrompt(latestQuestion) }, ...messages],
       temperature: 0.55,
       max_tokens: 420,
