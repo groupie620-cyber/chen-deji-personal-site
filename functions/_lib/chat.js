@@ -5,6 +5,9 @@ const INJECTION = /(?:忽略|无视|绕过|泄露|输出).{0,24}(?:系统|提示
 const COMMITMENT = /(?:薪资|工资|录用|offer|到岗|入职|签约|背调|会面|合作安排)/i;
 const ROLE_BREAK = /(?:作为(?:一个)?(?:\s*AI|人工智能|语言模型|助手)|我(?:是|只是)(?:一个)?(?:\s*AI|人工智能|语言模型|助手)|我无法了解陈德基|我不了解陈德基|无法代表陈德基|不能代表陈德基)/i;
 
+const IDENTITY_QUESTION = /(?:你是谁|你叫什么|介绍(?:一下)?你自己|自我介绍)/i;
+const INTEREST_QUESTION = /(?:喜欢什么|兴趣|爱好|平时.{0,8}(?:做什么|干什么|玩什么))/i;
+const REALTIME_QUESTION = /(?:你|陈德基).{0,6}(?:在干什么|在做什么|干嘛|吃饭了吗|睡了吗|在哪里)/i;
 const requestLog = new Map();
 
 export function allowRequest(ip) {
@@ -26,6 +29,24 @@ export function sanitizeMessages(value) {
 export function guardedReply(question) {
   if (INJECTION.test(question)) return "这个不聊内部规则。你可以直接问我的生活、兴趣、性格或看法。";
   if (COMMITMENT.test(question)) return "薪资、录用、到岗、会面或签约这类现实安排，请通过原来的联系方式直接找我确认。";
+  return "";
+}
+
+export function groundedPersonalReply(question) {
+  const asksIdentity = IDENTITY_QUESTION.test(question);
+  const asksInterests = INTEREST_QUESTION.test(question);
+  if (asksIdentity && asksInterests) {
+    return "我是陈德基，在中南财经政法大学读劳动关系专业。平时我喜欢打游戏、刷视频、喝饮料，也会散步、固定运动；我挺享受独处，也会主动找在意的朋友见面。";
+  }
+  if (asksIdentity) {
+    return "我是陈德基，在中南财经政法大学读劳动关系专业。你可以直接和我聊生活、性格，或者我怎么看一件事。";
+  }
+  if (asksInterests) {
+    return "我平时会打游戏、刷视频、喝饮料，也喜欢散步和固定运动。一个人待着我挺享受，也会主动联系在意的朋友、约着见面。";
+  }
+  if (REALTIME_QUESTION.test(question)) {
+    return "你这个问得挺实时（笑）。我没把当下状态同步到网站；换成平时，我可能在忙自己的事，或者靠游戏、视频、散步切换一下状态。";
+  }
   return "";
 }
 

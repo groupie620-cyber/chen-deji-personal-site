@@ -1,4 +1,4 @@
-import { allowRequest, buildPrompt, guardedReply, safeReply, sanitizeMessages } from "../_lib/chat.js";
+import { allowRequest, buildPrompt, groundedPersonalReply, guardedReply, safeReply, sanitizeMessages } from "../_lib/chat.js";
 
 export async function onRequestPost({ request, env }) {
   if (!env.AI) return Response.json({ error: "AI 服务尚未配置。" }, { status: 503 });
@@ -17,6 +17,8 @@ export async function onRequestPost({ request, env }) {
   if (!latestQuestion) return Response.json({ error: "请输入一个问题。" }, { status: 400 });
   const guarded = guardedReply(latestQuestion);
   if (guarded) return Response.json({ reply: guarded, mode: "guarded" });
+    const grounded = groundedPersonalReply(latestQuestion);
+  if (grounded) return Response.json({ reply: grounded, mode: "grounded" }, { headers: { "Cache-Control": "no-store" } });
 
   try {
     const result = await env.AI.run("@cf/deepseek-ai/deepseek-r1-distill-qwen-32b", {
