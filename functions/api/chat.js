@@ -26,7 +26,7 @@ export async function onRequestPost({ request, env }) {
       temperature: 0.35,
       max_tokens: 520,
     });
-    return Response.json({ reply: safeReply(result?.response) }, { headers: { "Cache-Control": "no-store" } });
+    return Response.json({ reply: safeReply(result?.response, latestQuestion) }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     console.error("Workers AI request failed", error);
     return Response.json({ error: "AI 服务暂时忙碌，请稍后再试。" }, { status: 502 });
