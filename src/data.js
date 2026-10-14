@@ -11,7 +11,7 @@ export const portfolioData = {
     navigation: [
       { label: "关于我与生活", href: "#about" },
       { label: "教育背景", href: "#journey" },
-      { label: "与我对话 · AMA", href: "#ama" },
+      { label: "与我对话", href: "#ama" },
     ],
     footerNote: "只展示本人确认过的公开信息。",
   },
@@ -22,7 +22,7 @@ export const portfolioData = {
     role: "中南财经政法大学 · 劳动关系专业",
     statement: "直接表达，认真生活，保持真实。",
     intro:
-      "我喜欢直接说重点，也重视健康、自由和少而深的关系。平时会通过游戏、视频、散步和运动切换节奏，也想把生活里的想法慢慢记录下来。",
+      "我喜欢看公众号，平时会通过游戏、视频、散步和运动切换节奏，也想把生活里的想法慢慢记录下来。",
     location: "",
     email: "",
     photos: [],
@@ -36,13 +36,13 @@ export const portfolioData = {
 
   about: {
     eyebrow: "ABOUT ME · 关于我",
-    title: "直接、真诚，也重视人与人之间的连接。",
+    title: "外向的ESFP",
     story:
-      "我喜欢直接说重点，也愿意理解他人的感受；做决定时会比较不同选项、听取意见，再由自己拍板。我重视健康、自由，以及少而深的关系，也希望按照适合自己的节奏生活和成长。",
+      "希望按照适合自己的节奏生活和成长。",
     style: {
       label: "SELF PORTRAIT · 自我描述",
       mbti: "ESFP",
-      title: "直接表达，也愿意理解人",
+      title: "表达欲丰富，共情能力强",
       description: "这是我目前对自己的性格描述，并非专业测评结论。我偏好就事论事、不绕弯，也重视共情与真实的连接。",
     },
     values: [
@@ -75,7 +75,7 @@ export const portfolioData = {
         icon: "mic",
         accent: "sand",
         items: ["独处", "主动联系朋友", "定期见面"],
-        note: "我享受独处，也珍惜少而深的朋友关系。",
+        note: "享受独处，也喜欢社交活动。",
       },
     ],
   },
@@ -102,7 +102,7 @@ export const portfolioData = {
 
   contact: {
     eyebrow: "LET’S CONNECT · 保持联系",
-    title: "如果你也重视真实、自由与人与人之间的连接，欢迎认识我。",
+    title: "欢迎认识我！",
     note: "公开联系方式尚未由本人确认。现阶段请通过你收到本页面的原渠道联系我。",
     socialLinks: [],
   },
@@ -112,11 +112,11 @@ export const portfolioData = {
     eyebrow: "ASK ME ANYTHING · 与我对话",
     title: "问我任何事。",
     description:
-      "这是一个以我的公开资料、长期讨论和表达偏好为知识基础的 AMA。它会寻找相近观点，用自然对话帮助你了解我。",
+      "这是一个以我的公开资料、长期讨论和表达偏好为知识基础的AI。它会寻找相近观点，用自然对话帮助你了解我。",
     disclaimer:
       "这是陈德基的 AI 分身实验，不是陈德基本人。它会区分本人确认资料和谨慎推演；访客问题会发送给 Cloudflare Workers AI，请勿输入隐私。回答不能代替本人作出承诺。",
     welcome:
-      "你好，我是陈德基的 AMA AI。你可以和我聊他的生活、兴趣、性格、价值观，以及他对一些问题的看法。",
+      "你好，我是陈德基的AI分身。你可以和我聊他的生活、兴趣、性格、价值观，以及他对一些问题的看法。",
     inputPlaceholder: "例如：你如何看待工作、成长与选择？",
     quickQuestions: [
       "你如何看待工作、成长与选择？",
