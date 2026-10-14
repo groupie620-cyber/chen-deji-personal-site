@@ -22,7 +22,7 @@ export async function onRequestPost({ request, env }) {
     const result = await env.AI.run("@cf/deepseek-ai/deepseek-r1-distill-qwen-32b", {
       messages: [{ role: "system", content: buildPrompt(latestQuestion) }, ...messages],
       temperature: 0.55,
-      max_tokens: 420,
+      max_tokens: 900,
     });
     return Response.json({ reply: safeReply(result?.response) }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
