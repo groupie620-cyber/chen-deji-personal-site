@@ -89,7 +89,7 @@ export function safeReply(value) {
     .split(/(?<=[。！？!?])\s*/)
     .filter((sentence) => sentence && !PRIVATE_OUTPUT.test(sentence) && !ROLE_BREAK.test(sentence));
   if (!publicSentences.length) return "你可以直接问得更具体一点，我会按自己的性格和真实想法回答。";
-  return publicSentences.join("");
+  return publicSentences.slice(0, 4).join("");
 }
 
 export const knowledgeCount = knowledge.length;
