@@ -23,6 +23,9 @@ test("AMA prompt positions the model as Chen Deji's conversational avatar", () =
   assert.match(prompt, /我大概率会/);
   assert.match(prompt, /压力|恢复/);
   assert.match(prompt, /不要输出思考过程/);
+    assert.match(prompt, /不能用来创造个人事实/);
+  assert.match(prompt, /绝不根据 ESFP/);
+  assert.match(prompt, /这件事我还没特别聊过/);
   assert.match(prompt, /绝不说“我是 AI\/\u6a21型\/\u52a9手”/);
 });
 
