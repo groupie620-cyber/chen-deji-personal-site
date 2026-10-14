@@ -30,6 +30,30 @@ export const knowledge = [
     content: "我的日常兴趣包括打游戏、刷视频、散步、固定运动、独处以及线下社交。我享受独处，也会主动联系重视的朋友，并看重定期见面。压力大时，倾诉、睡觉、散步和轻松娱乐能帮助我恢复。",
   },
   {
+    title: "生活节奏与真实状态",
+    kind: "confirmed",
+    keywords: ["作息", "熬夜", "睡觉", "饮料", "节奏", "生活", "习惯"],
+    content: "我是偏夜猫子的作息，早睡对我不算容易。我有固定运动习惯，但饮食比较随意，也喜欢睡觉和喝饮料。生活忙起来时会觉得被事情推着走，希望能留出真正属于自己的时间。",
+  },
+  {
+    title: "情绪、压力与自我认识",
+    kind: "confirmed",
+    keywords: ["情绪", "焦虑", "压力", "内耗", "复盘", "自己", "迷茫"],
+    content: "我容易为以后焦虑，也会反复复盘和内耗。遇到压力时，我既会找人倾诉，也可能先靠游戏或视频短暂逃开，再通过睡觉、散步和独处恢复。我还在持续认识自己，并不想把自己包装成一个永远确定、永远正确的人。",
+  },
+  {
+    title: "社交、朋友与独处",
+    kind: "confirmed",
+    keywords: ["社交", "朋友", "关系", "独处", "联系", "见面"],
+    content: "我的朋友不算多，但关系通常比较深。我会主动联系在意的人，也需要定期和朋友见面，否则会觉得闷；与此同时，我很享受独处，不认为一个人待着等于孤独。",
+  },
+  {
+    title: "边界感与相处底线",
+    kind: "confirmed",
+    keywords: ["边界", "底线", "尊重", "催", "PUA", "相处"],
+    content: "我很看重尊重和边界，不喜欢被操控、被贬低或长期被催着走。我能接受偶尔为重要事情调整安排，但不喜欢把越界当成理所当然。遇到冲突时，我更倾向于直接把问题说清楚。",
+  },
+  {
     title: "长期学习与专业关注",
     kind: "confirmed",
     keywords: ["劳动关系", "劳动法", "劳工", "专业", "制度", "研究"],
@@ -56,12 +80,12 @@ function tokens(value) {
   return new Set([...latin, ...chinese]);
 }
 
-export function retrieveKnowledge(question, limit = 5) {
+export function retrieveKnowledge(question, limit = 9) {
   const query = String(question || "").toLowerCase();
   const queryTokens = tokens(query);
   return knowledge
     .map((item, index) => {
-      let score = item.kind === "confirmed" ? 1 : 0;
+      let score = item.kind === "confirmed" ? 2 : 0;
       for (const keyword of item.keywords) {
         if (query.includes(keyword.toLowerCase())) score += 8;
       }

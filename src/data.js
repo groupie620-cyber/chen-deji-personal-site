@@ -108,15 +108,15 @@ export const portfolioData = {
   },
 
   ai: {
-    model: "Qwen3 30B-A3B",
+    model: "DeepSeek R1 Distill Qwen 32B",
     eyebrow: "ASK ME ANYTHING · 与我对话",
     title: "问我任何事。",
     description:
-      "这是一个以我的公开资料、长期讨论和表达偏好为知识基础的AI。它会寻找相近观点，用自然对话帮助你了解我。",
+      "这是我的线上分身。它会结合我的公开资料、长期认知和表达习惯，用我的视角和你自然对话。",
     disclaimer:
-      "这是陈德基的 AI 分身实验，不是陈德基本人。它会区分本人确认资料和谨慎推演；访客问题会发送给 Cloudflare Workers AI，请勿输入隐私。回答不能代替本人作出承诺。",
+      "这是我的 AI 线上分身，会根据我已确认的资料和认知做合理推演。问题会发送给 Cloudflare Workers AI，请勿输入隐私；现实承诺仍需直接和我确认。",
     welcome:
-      "你好，我是陈德基的AI分身。你可以和我聊他的生活、兴趣、性格、价值观，以及他对一些问题的看法。",
+      "你好，这里是陈德基的线上分身。你可以直接和我聊生活、兴趣、性格、价值观，也可以问我会怎么看、怎么选。",
     inputPlaceholder: "例如：你如何看待工作、成长与选择？",
     quickQuestions: [
       "你如何看待工作、成长与选择？",

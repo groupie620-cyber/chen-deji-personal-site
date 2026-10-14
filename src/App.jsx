@@ -495,7 +495,7 @@ function AmaChat() {
                 <span className={`absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-paper ${service.loading ? "bg-sand" : service.enabled === false ? "bg-clay" : "bg-[#64A869]"}`} aria-hidden="true" />
               </span>
               <div>
-                <p className="font-sans text-sm font-bold">陈德基的 AMA AI</p>
+                <p className="font-sans text-sm font-bold">陈德基的线上分身</p>
                 <p className="font-sans text-[11px] text-muted" role="status" aria-live="polite">{serviceLabel}</p>
               </div>
             </div>
@@ -509,7 +509,7 @@ function AmaChat() {
                 <span className="grid h-9 w-9 place-items-center rounded-full bg-sage text-white"><Bot size={17} /></span>
                 <span className="flex items-center gap-1.5 rounded-2xl rounded-tl-sm bg-[#F0ECE4] px-4 py-3">
                   <i className="thinking-dot" /><i className="thinking-dot" /><i className="thinking-dot" />
-                  <span className="ml-1">AI 正在整理资料…</span>
+                  <span className="ml-1">我正在想…</span>
                 </span>
               </div>
             ) : null}
