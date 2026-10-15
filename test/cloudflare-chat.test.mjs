@@ -75,6 +75,13 @@ test("unverified details are removed when Chinese omits the first-person subject
   );
 });
 
-test("replies are limited to three conversational sentences", () => {
-  assert.equal(safeReply("第一句。第二句。第三句。第四句。", "测试"), "第一句。第二句。第三句。");
+test("replies are limited to two conversational sentences", () => {
+  assert.equal(safeReply("第一句。第二句。第三句。第四句。", "测试"), "第一句。第二句。");
+});
+
+test("stress questions use only confirmed recovery habits", () => {
+  assert.equal(
+    groundedPersonalReply("你压力大时怎么恢复？"),
+    "压力大时，我一般会找人倾诉、睡觉、散步，或者做点轻松的娱乐让自己缓一缓。",
+  );
 });
