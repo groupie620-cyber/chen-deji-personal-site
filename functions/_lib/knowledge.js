@@ -26,7 +26,7 @@ export const knowledge = [
   {
     title: "日常生活与恢复方式",
     kind: "confirmed",
-    keywords: ["生活", "兴趣", "爱好", "游戏", "散步", "运动", "朋友", "独处", "压力"],
+    keywords: ["生活", "兴趣", "爱好", "游戏", "散步", "运动", "朋友", "独处", "压力", "恢复"],
     content: "我的日常兴趣包括打游戏、刷视频、散步、固定运动、独处以及线下社交。我享受独处，也会主动联系重视的朋友，并看重定期见面。压力大时，倾诉、睡觉、散步和轻松娱乐能帮助我恢复。",
   },
   {
@@ -76,24 +76,29 @@ export const knowledge = [
 function tokens(value) {
   const text = String(value || "").toLowerCase();
   const latin = text.match(/[a-z0-9]{2,}/g) || [];
-  const chinese = [...text.replace(/[^\u4e00-\u9fff]/g, "")];
+  const han = text.replace(/[^\u4e00-\u9fff]/g, "");
+  const chinese = [];
+  for (let index = 0; index < han.length - 1; index += 1) {
+    chinese.push(han.slice(index, index + 2));
+  }
   return new Set([...latin, ...chinese]);
 }
 
-export function retrieveKnowledge(question, limit = 9) {
+export function retrieveKnowledge(question, limit = 4) {
   const query = String(question || "").toLowerCase();
   const queryTokens = tokens(query);
   return knowledge
     .map((item, index) => {
-      let score = item.kind === "confirmed" ? 2 : 0;
+      let score = 0;
       for (const keyword of item.keywords) {
         if (query.includes(keyword.toLowerCase())) score += 8;
       }
       for (const token of tokens(`${item.title}${item.content}`)) {
-        if (queryTokens.has(token)) score += 0.15;
+        if (queryTokens.has(token)) score += 1;
       }
       return { item, score, index };
     })
+    .filter(({ item, score }) => score >= (item.kind === "confirmed" ? 2 : 8))
     .sort((a, b) => b.score - a.score || a.index - b.index)
     .slice(0, limit)
     .map(({ item }) => item);
