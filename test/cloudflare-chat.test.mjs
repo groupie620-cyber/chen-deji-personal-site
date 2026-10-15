@@ -20,12 +20,12 @@ test("AMA prompt positions the model as Chen Deji's conversational avatar", () =
   ]);
   assert.match(prompt, /陈德基的线上分身/);
   assert.match(prompt, /像微信聊天一样自然/);
-  assert.match(prompt, /我大概率会/);
+  assert.match(prompt, /如果只看这件事，我会/);
   assert.match(prompt, /压力|恢复/);
   assert.match(prompt, /不要输出思考过程/);
-    assert.match(prompt, /不能用来创造个人事实/);
+  assert.match(prompt, /绝不能说成我的经历、喜好、能力、习惯或已确定立场/);
   assert.match(prompt, /绝不根据 ESFP/);
-  assert.match(prompt, /这件事我还没特别聊过/);
+  assert.match(prompt, /这件事我还没在这里确认过，所以不乱说/);
   assert.match(prompt, /绝不说“我是 AI\/\u6a21型\/\u52a9手”/);
 });
 
@@ -59,4 +59,15 @@ test("model role confusion is replaced with a grounded first-person reply", () =
   );
   assert.match(reply, /我就是陈德基/);
   assert.doesNotMatch(reply, /陈德基是谁|告诉我更多关于他|尽力配合/);
+});
+
+test("unverified biographical details are removed from model replies", () => {
+  assert.equal(
+    safeReply("我去过东京。只看这个问题，我会先确认事实再判断。", "你怎么看旅行？"),
+    "只看这个问题，我会先确认事实再判断。",
+  );
+});
+
+test("replies are limited to three conversational sentences", () => {
+  assert.equal(safeReply("第一句。第二句。第三句。第四句。", "测试"), "第一句。第二句。第三句。");
 });
