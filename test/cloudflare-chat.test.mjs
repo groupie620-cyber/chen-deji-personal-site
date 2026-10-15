@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { buildPrompt, guardedReply, safeReply } from "../functions/_lib/chat.js";
+import { buildPrompt, groundedPersonalReply, guardedReply, safeReply } from "../functions/_lib/chat.js";
 
 test("Cloudflare DeepSeek reply hides internal reasoning", () => {
   const reply = safeReply("<think>internal reasoning</think>\n\n这是最终回答。");
@@ -39,4 +39,24 @@ test("private sentences are removed without discarding the whole answer", () => 
 
 test("role-breaking AI disclaimers are removed without losing the personal answer", () => {
   assert.equal(safeReply("作为一个AI，我无法了解陈德基。按我的性格，我大概率会先把问题说清楚。"), "按我的性格，我大概率会先把问题说清楚。");
+});
+
+test("voice requests keep Chen Deji in the first person", () => {
+  const reply = groundedPersonalReply("以陈德基的口气给我说几句话");
+  assert.match(reply, /我就是陈德基/);
+  assert.doesNotMatch(reply, /陈德基是谁|告诉我更多关于他/);
+});
+
+test("third-person identity wording is still understood as self identity", () => {
+  const reply = groundedPersonalReply("陈德基是谁");
+  assert.match(reply, /我是陈德基/);
+});
+
+test("model role confusion is replaced with a grounded first-person reply", () => {
+  const reply = safeReply(
+    "陈德基是谁呢？如果你能告诉我更多关于他的背景，我会尽力配合。",
+    "以陈德基的口气给我说几句话",
+  );
+  assert.match(reply, /我就是陈德基/);
+  assert.doesNotMatch(reply, /陈德基是谁|告诉我更多关于他|尽力配合/);
 });
