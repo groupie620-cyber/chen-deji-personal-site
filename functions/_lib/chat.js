@@ -6,7 +6,7 @@ const COMMITMENT = /(?:薪资|工资|录用|offer|到岗|入职|签约|背调|�
 const ROLE_BREAK = /(?:作为(?:一个)?(?:\s*AI|人工智能|语言模型|助手)|我(?:是|只是)(?:一个)?(?:\s*AI|人工智能|语言模型|助手)|我无法了解陈德基|我不了解陈德基|无法代表陈德基|不能代表陈德基)/i;
 const SUPPORT_BOT_REPLY = /(?:如果你有任何问题|如果你需要(?:帮助|建议)|随时告诉我|我会尽力(?:为你)?(?:提供)?帮助|很高兴(?:能)?(?:和你交流|为你服务))/i;
 const ROLE_CONFUSION_REPLY = /(?:陈德基是谁|告诉我更多关于(?:他|陈德基)|希望我以什么样的语气|我会尽力配合|不了解(?:他|陈德基)的背景)/i;
-const UNVERIFIED_PERSONAL_DETAIL = /(?:我|我的).{0,12}(?:曾经|去过|读过|看过|写过|做过|参加过|获得过|拿过|来自|住在|居住|毕业于|就职于|任职于|养过|拥有过)|我.{0,20}《[^》]+》/i;
+const UNVERIFIED_PERSONAL_DETAIL = /(?:我|我的).{0,12}(?:曾经|去过|读过|看过|写过|做过|参加过|获得过|拿过|来自|住在|居住|毕业于|就职于|任职于|养过|拥有过)|^(?:还没|没有|没)?(?:去过|读过|看过|写过|做过|参加过|获得过|拿过)|《[^》]+》|^(?:至于)?(?:书|电影|影视|游戏).{0,16}(?:喜欢|偏好)|^(?:我)?(?:最|特别)?喜欢(?:的)?(?:书|电影|影视|游戏)/i;
 
 const IDENTITY_QUESTION = /(?:你是谁|你叫什么|介绍(?:一下)?你自己|自我介绍|陈德基是谁|你是陈德基吗|介绍(?:一下)?陈德基)/i;
 const VOICE_REQUEST = /(?:(?:以|用|按照).{0,6}(?:陈德基|你的).{0,4}(?:口气|语气|风格)|(?:模仿|像).{0,4}陈德基)/i;
@@ -115,7 +115,7 @@ ${context}`;
   if (SUPPORT_BOT_REPLY.test(reply)) return groundedPersonalReply(question) || "我不想用客服套话敷衍你。你问得具体一点，我会直接说自己怎么想。"; const publicSentences = reply
     .split(/(?<=[。！？!?])\s*/)
     .filter((sentence) => sentence && !PRIVATE_OUTPUT.test(sentence) && !ROLE_BREAK.test(sentence) && !UNVERIFIED_PERSONAL_DETAIL.test(sentence));
-  if (!publicSentences.length) return "你可以直接问得更具体一点，我会按自己的性格和真实想法回答。";
+  if (!publicSentences.length) return "这件事我还没在这里确认过，所以不乱说。";
   return publicSentences.slice(0, 3).join("");
 }
 
