@@ -68,6 +68,13 @@ test("unverified biographical details are removed from model replies", () => {
   );
 });
 
+test("unverified details are removed when Chinese omits the first-person subject", () => {
+  assert.equal(
+    safeReply("还没去过东京，但一直很想去看看。最喜欢的书是《百年孤独》。至于电影，喜欢能让人思考人性的作品。", "你去过东京吗？最喜欢什么书和电影？"),
+    "这件事我还没在这里确认过，所以不乱说。",
+  );
+});
+
 test("replies are limited to three conversational sentences", () => {
   assert.equal(safeReply("第一句。第二句。第三句。第四句。", "测试"), "第一句。第二句。第三句。");
 });
